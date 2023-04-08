@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { links } from "./utils/links";
+import Doctor from '../images/doctor.jpg'
 
 const Card = ({ name, username, id, email , phone, website}) => {
   const [isFav, setIsFav] = useState(false);
@@ -36,7 +37,7 @@ const Card = ({ name, username, id, email , phone, website}) => {
         {/* No debes olvidar que la Card a su vez servira como Link hacia la pagina de detalle */}
         {/* Ademas deberan integrar la logica para guardar cada Card en el localStorage */}
       <Link to={`${links.dentist.path}/${id}`}>
-        <img src="./images/doctor.jpg" alt={username} />
+        <img src={Doctor} alt={username} />
         <h4>{name}</h4>
         <p>{username}</p>
         <p>{email}</p>
