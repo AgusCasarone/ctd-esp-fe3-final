@@ -1,22 +1,28 @@
+*{
+  padding-bottom: 0vh;
+}
+
 body {
-  padding-top: 5rem;
+  height: 90vh;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  background-color: #06493c;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 .favButton{
   background-color: rgba(136, 136, 136, 0.116);
   padding: 10px;
   border: none;
+  border-radius: 15px;
   width: 100%;
   cursor: pointer;
 }
@@ -26,22 +32,17 @@ h1{
 }
 
 nav{
-  display: flex;
-  width: 100vw;
-  height: 4rem;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: aquamarine;
   position: fixed;
-  top: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content:space-around;
+  background-color: #19c8c8;
+  width: 100%;
+  top: 0;
 }
 
-.routes, .options {
+nav div {
   display: flex;
-  flex-direction: row;
+  align-items: center;
 }
 
 a{
@@ -54,37 +55,70 @@ a:hover{
   color: rgb(136, 136, 136);
 } 
 
+main{
+  padding: 70px;
+}
+
 footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding-top: 2rem;
   position: fixed;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  padding: 1rem;
   bottom: 0;
-  height: 40px;
+  height: 1rem;
   width: 100vw;
-  margin-top: 2rem;
 }
 
-footer > img{
+footer > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+footer > div > img{
   width: 200px;
-  margin: 0;
-}
-
-footer > p{
-  margin: 0;
-  padding-top: 0.7rem;
 }
 
 form{
+  height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   width: 300px;
-  height: 100px;
   margin: 0 auto;
+}
+
+p {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+form > input {
+	height: 1rem;
+  padding: 12px;
+  border: 1.5px solid rgb(243, 233, 223);
+  border-radius: 4px;
+  font-family: 'Segoe UI', sans-serif;
+  outline: 0;
+  transition: .2s;
+  margin-top: 20px;
+}
+
+form > input:focus {
+  border-color: #dd051d;
+}
+
+form > button {
+  padding: 12px 10px;
+  border: 0;
+  background: linear-gradient(to right, #fa0000 0%,#b00d10 100%); 
+  border-radius: 3px;
+  margin-top: 10px;
+  color: rgb(243, 233, 223);
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 .card{
@@ -92,13 +126,32 @@ form{
   justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   width: 200px;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  padding: 1rem;
   border: 0.5px solid rgb(136, 136, 136);
+  border-radius: 15px;
+  margin-bottom: 1vh;
+}
+
+.favorite{
+  color: rgb(226,5,30);
+}
+
+.material-symbols-rounded {
+  font-variation-settings:
+  'FILL' 100,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.card{
+  background-color: rgba(243, 223, 223, 0.418);
 }
 
 .card:hover{
-  border: 0.5px solid rgb(206, 217, 142);
+  border: 1px solid rgb(226,5,30);
 }
 
 .card-grid{
@@ -111,29 +164,42 @@ form{
   margin: 0 auto;
 }
 
+.card img{
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+}
+
 table {
  border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
+    width: 90%;
     display: table;
     border: 1px solid #ccc;
+    margin: 0px 50px 0px 50px;
 
 }
 
 td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid rgb(243, 233, 223);
   text-align: left;
   padding: 8px;
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  background-color: rgb(243, 233, 223);
 }
 
 .dark{
-  background-color: #12121296;
-  color: white;
+  background-color: #06493c;
+  color: rgb(223, 243, 237);
 }
 .dark > a {
-  color: white;
+  color: rgb(243, 233, 223);
+}
+
+
+.light {
+  background-color: #8bdfd0d4;
+  color: #00000096
 }

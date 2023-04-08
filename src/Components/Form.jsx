@@ -1,69 +1,81 @@
 import React from "react";
 import { useState } from "react";
 
+
 const Form = () => {
-    //Aqui deberan implementar el form completo con sus validaciones
+  //Aqui deberan implementar el form completo con sus validaciones
+  const [newUser, setNewUser] = useState({
+    nombre: "",
+    email: "",
+  });
 
-    const [user, setUser] = useState(
-      {
-        name: '',
-        email: ''
-      }
-    )
-    const [show, setShow] = useState(false)
-    const [error, setError] = useState(false)
+  const [errors, setErrors] = useState({});
 
-    const handleSubmit = (event) => {
-      event.preventDefault()
-      console.log('Se envio el form');
+  const handleInputChange = (e) => {
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-      const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-      let emailTest = emailRegex.test(user.email)
+  const validate = (newUser) => {
+    const emailRegex =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g;
 
-      if(emailTest && user.name.length > 5) {
-        setShow(true)
-        setError(false)
-      } else {
-        setError(true)
-        setShow(false)
-      }
+    const error = { nombreError: "", emailError: "" };
+
+    if (!newUser.nombre || newUser.nombre.length < 5) {
+      error.nombreError =
+        "El nombre debe tener al menos 5 caracteres";
     }
 
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>Nombre Completo</label>
-            <input 
-            type="text"
-            onChange={(event) => {setUser({...user, name: event.target.value})}} />
+    if (!newUser.email || !emailRegex.test(newUser.email)) {
+      error.emailError = "El email debe ser válido";
+    }
 
-          <label>Email</label>
-            <input 
-            type="text"
-            onChange={(event) => {setUser({...user, email: event.target.value})}} />
+    if (error.nombreError || error.emailError) {
+      setErrors(error);
+      return false;
+    }
 
-          <button>Guardar mis datos</button> 
-        </form>
+    setErrors({});
+    return true;
+  };
 
-      
-        {
-        show
-        ?
-        <p>Gracias {user.name} te contactaremos cuando antes vía mail.</p>
-        :
-        null
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // El valor que le pasa lo deberias sacar del evento
+    const isValid = validate(newUser);
 
-        {
-        error
-        &&
-        <div className='error-msg'>
-          <p>Por favor verifique su información nuevamente.</p>
-        </div>
-        }
+    if (!isValid) {
+      return;
+    }
+    alert(`Gracias ${newUser.nombre}, te contactaremos cuando antes vía mail`);
+  };
 
-        </div>
-    );
+  return (
+    <div>
+      <form>
+        <input
+          placeholder='Ingresa tu nombre'
+          className={errors.nombreError ? "inputError" : ""}
+          name="nombre"
+          type="text"
+          onChange={handleInputChange}
+        />
+        {errors.nombreError && <label> 🔔 {errors.nombreError}</label>}
+        <input
+          placeholder='Ingresa tu correo'
+          className={errors.emailError ? "inputError" : ""}
+          name="email"
+          type="email"
+          onChange={handleInputChange}
+        />
+        {errors.emailError && <label> 🔔 {errors.emailError}</label>}
+        <button onClick={handleSubmit}>Enviar</button>
+      </form>
+    </div>
+  );
 };
 
 export default Form;

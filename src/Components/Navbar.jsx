@@ -1,27 +1,30 @@
-import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-
+import React from 'react';
+import { useContextGlobal } from "./utils/global.context";
+import { Link } from "react-router-dom";
+import { links } from "./utils/links";
+import ButtonTheme from "./Theme/ButtonTheme";
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Navbar = () => {
-  const navigate = useNavigate()
+  const { theme, dispatchTheme } = useContextGlobal();
+  const { home, contact, favs } = links;
+
+  const handleTheme = () => {
+    console.log(theme);
+    dispatchTheme({ type: theme.color === "light" ? "SET_DARK" : "SET_LIGHT" });
+  };
 
   return (
     <nav>
-      {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <div className="routes">
-        <Link to="/home"><h3>Home</h3></Link>
-        <Link to="/dentist/:id"><h3>Dentist</h3></Link>
-        <Link to="/contact"><h3>Contact</h3></Link>
-        <Link to="/favs"><h3>Favs</h3></Link>
+      <h2>Dentistas</h2>
+      <div>
+        {/* Aqui deberan agregar los liks correspondientes a las rutas definidas */}
+        <Link to={home.path}>{home.name}</Link>
+        <Link to={contact.path}>{contact.name}</Link>
+        <Link to={favs.path}>{favs.name}</Link>
+        {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
+        <ButtonTheme onClick={handleTheme} />
       </div>
-     
-      <div className="options">
-        <button onClick={() => navigate(-3)}>↩</button>
-        <button>Change theme</button>
-      </div>
-      
     </nav>
   )
 }
