@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { links } from "./utils/links";
 
-const Card = ({ name, username, id }) => {
+const Card = ({ name, username, id, email , phone, website}) => {
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
@@ -39,6 +39,9 @@ const Card = ({ name, username, id }) => {
         <img src="./images/doctor.jpg" alt={username} />
         <h4>{name}</h4>
         <p>{username}</p>
+        <p>{email}</p>
+        <p>{phone}</p>
+        <p>{website}</p>
         {/* <p>{id}</p> */}
       </Link>
       <button onClick={addFav} className="favButton">
